@@ -1,6 +1,8 @@
 import './App.css';
 import React, { useEffect , useState} from 'react';
 import RestrauntCard from './RestrauntCard';
+import Shimmer from './shimmer';
+
 
 
 const Body =() =>{
@@ -19,55 +21,86 @@ const Body =() =>{
   
     const json = await data.json();
   
-
-    setAllRestaurant(json?.data?.cards[2]?.data?.data?.cards);
-    setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+    // console.log(json?.data.cards[3].card.card.gridElements.infoWithStyle.restaurants);
+    // setAllRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+    // setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+    setAllRestaurant(json?.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+    setFilteredRestaurant(json?.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
   
   }
 
-  const FilterRest = () =>{
-    console.log("showsearchRest")
-    if(searchText.length > 0){
-      const showsearchRest = allRestaurant.filter((item) =>  item.data?.name.includes(searchText))
+  const searchFunc = (p)=>{
+    setSearchText(p);
+    if(p.length > 0){
+      const showsearchRest = allRestaurant.filter((item) =>  item.info.name.toLowerCase().includes(p.toLocaleLowerCase()))
       console.log("showsearchRest two",showsearchRest)
       setFilteredRestaurant(showsearchRest)
-
+      console.log("showsearchRest", searchText)
     }else{
-     setFilteredRestaurant(allRestaurant)
+      setFilteredRestaurant(allRestaurant)
     }
-  
+    
   }
 
-  return(
-    <>
-    <input
+
+  // useEffect(
+  //   () =>{
+  //   if(searchText.length > 0){
+  //     const showsearchRest = allRestaurant.filter((item) =>  item.info.name.toLowerCase().includes(searchText.toLocaleLowerCase()))
+  //     console.log("showsearchRest two",showsearchRest)
+  //     setFilteredRestaurant(showsearchRest)
+  //     console.log("showsearchRest", searchText)
+  //   }else{
+  //     setFilteredRestaurant(allRestaurant)
+  //   }
+  // }
+  // ,[searchText])
+
+  
+
+ 
+
+  return <div>
+    <div className='search_bar'>
+      <input
           type="text"
           value={searchText}
-          placeholder="Type Restraunt Name"
-          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="Type Restuarant Name"
+          onChange={(e) => searchFunc(e.target.value)}
+          className='search_bar_input'
           
           />
-          <button
-          onClick={() =>
-          FilterRest()
-          }>
-            Search
-          </button>
-    {
-    filteredRestaurant.map((item, index) =>{
-      return (
-        <div key={index}>
-          
-          <RestrauntCard restaurantNew={item}/>
-        </div>
          
-      )
-    })
-   }
-    </>
-   
-   
-  )
+      </div>
+      {
+         filteredRestaurant.length === 0?
+
+         (<div>
+           <Shimmer />
+         </div>):
+         (
+           <div>
+           
+           {
+           filteredRestaurant.map((item, index) =>{
+             return (
+               <div className='res_container'
+               key={index}>
+                 
+                 <RestrauntCard restaurantNew={item}/>
+               </div>
+                
+             )
+           })
+          }
+           </div>
+          
+          
+         )
+      }
+  </div>
+  
+ 
 }
 
 

@@ -1,8 +1,20 @@
 .header {
   display: flex;
   justify-content: space-between;
+  border:1px solid rgb(0, 0, 0);
+  border-radius: 5px;
   margin: 10px;
+  background-color: lightblue;
 }
+
+.header_logo{
+  width: 75px;
+}
+
+.nav_item {
+padding: 0px 10px;
+}
+
 
 .nav_item > ul{
   display: flex;
@@ -11,13 +23,55 @@
 
 .nav_item > ul > li{
   padding: 10px;
+  font-size: 18px;
 }
 
 .card{
   width: 200px;
-  border: 1px solid black;
+  height: 350px;
+  background-color:lightblue;
   padding: 10px;
-  margin: 10px;
+  margin: 15px;
+}
+.Shimmer-card{
+  width: 200px;
+  height: 350px;
+  background-color:lightblue;
+  padding: 10px;
+  margin: 15px;
+}
+.Shimmer-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.res_container :hover{
+cursor: pointer;
+  border: 1px solid black;
+ 
+}
+
+.res_container{
+  display:inline-flex;
+  flex-wrap:wrap;
+}
+
+.search_bar{
+  width: 1000px;
+  height: 70px;
+  display: flex;
+}
+
+.search_bar_input{
+  width: 700px;
+  height: 50px;
+  font-size: large;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  margin-left: 300px;
+  text-align:start;
+  padding-left: 20px;
 }
 
 
