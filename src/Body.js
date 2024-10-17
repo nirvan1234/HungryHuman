@@ -1,7 +1,8 @@
 import './App.css';
 import React, { useEffect , useState} from 'react';
-import RestrauntCard from './RestrauntCard';
+import RestrauntCard , {withPromotedLabel} from './RestrauntCard';
 import Shimmer from './shimmer';
+
 
 
 
@@ -14,6 +15,8 @@ const Body =() =>{
   useEffect(() =>{
     getData();
   },[])
+
+  const RestaurantCardPromoted = withPromotedLabel(RestrauntCard);
   
   async function getData(){
   
@@ -86,8 +89,12 @@ const Body =() =>{
              return (
                <div className='res_container'
                key={index}>
-                 
-                 <RestrauntCard restaurantNew={item}/>
+                 {/* {item.restaurantNew?.info.isOpen ?
+                  <RestrauntCard restaurantNew={item} />:
+                  <RestaurantCardPromoted restaurantNew={item}/>
+
+                 } */}
+                 <RestrauntCard restaurantNew={item} />
                </div>
                 
              )

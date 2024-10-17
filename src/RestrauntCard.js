@@ -3,16 +3,18 @@ import "./App.css";
 
 import { FaStar } from "react-icons/fa";
 import { useNavigation  , Link} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 
 
 
 const RestrauntCard = (props) => {
-
+  console.log("PP",props);
 
   const id = props.restaurantNew.info.id;
 
-  console.log("PP",props);
+ 
   return (
     <Link to={`/restaurant/:${id}`}>
     <div className="card">
@@ -25,6 +27,17 @@ const RestrauntCard = (props) => {
     </div></Link>
     
   );
+};
+
+export const withPromotedLabel = (RestrauntCard) =>{
+  return (props) =>{
+    return (
+      <div>
+        <label>Label</label>
+        <RestrauntCard  {...props}/>
+      </div>
+  )
+  }
 };
 
 export default RestrauntCard;
