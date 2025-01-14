@@ -1,7 +1,6 @@
-import React from "react";
-import './App.css';
+import React,{useState} from "react";
 import {Link} from "react-router-dom";
-import { UseSelector, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 
 
@@ -9,7 +8,13 @@ const Header = () =>{
 
   const cartItem = useSelector((store) => store.cart.items)
 
-  console.log("cart", cartItem);
+  const [toggle, setToggle] = useState(false);
+
+  const toggleButton = () =>{
+   setToggle(!toggle);
+  }
+
+  // console.log("cart", cartItem);
 
   return(
 
@@ -29,13 +34,21 @@ const Header = () =>{
         <Link to='/about'>About</Link>
       </li>
       <li>
-        <Link to='/about'>Search</Link>
+        <Link to='/contact'>Contact</Link>
       </li>
       <li>
       <Link to='/cart'>Cart {cartItem.length}</Link>
       </li>
+      {
+        toggle ? 
+        <button onClick={toggleButton} className="button_nav">
+          Login
+        </button> :
+        <button onClick={toggleButton} className="button_nav">
+          Logout
+        </button>
+      }
         </ul>
-
       </div>
   </div>
   )

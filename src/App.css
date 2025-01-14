@@ -1,4 +1,4 @@
-.header {
+.header  {
   display: flex;
   justify-content: space-between;
   border:1px solid rgb(0, 0, 0);
@@ -72,6 +72,18 @@ cursor: pointer;
   margin-left: 300px;
   text-align:start;
   padding-left: 20px;
+}
+
+.formContainer {
+  display: flex;
+  justify-content:space-evenly;
+  flex-direction:column;
+  justify-content: center;
+}
+
+.button_nav{
+  border-radius: 10%;
+  padding: auto;
 }
 
 
