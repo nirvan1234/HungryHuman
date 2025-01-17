@@ -11,7 +11,7 @@ test("should render Restaurant Card Component with props Data" ,() =>{
         </BrowserRouter>
     )
 
-    const name = screen.getByText("Burger");
+    const name = screen.getByTestId("resCardName");
 
     expect(name).toBeInTheDocument();
 

@@ -9,6 +9,7 @@ import { createBrowserRouter, Outlet } from 'react-router-dom';
 import RestaurantMenu from './RestaurantMenu';
 import { Provider } from 'react-redux';
 import appStore from './utils/appStore';
+import "./App.css"
 
 
 const AppLayout = () =>{

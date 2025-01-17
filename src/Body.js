@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useEffect , useState} from 'react';
 import RestrauntCard , {withPromotedLabel} from './RestrauntCard';
 import Shimmer from './shimmer';
@@ -21,21 +20,20 @@ const Body =() =>{
   async function getData(){
   
     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.488186&lng=73.934762&page_type=DESKTOP_WEB_LISTING");
-  
     const json = await data.json();
   
-    // console.log(json?.data.cards[3].card.card.gridElements.infoWithStyle.restaurants);
+    console.log(json?.data?.cards[1].card.card.gridElements.infoWithStyle.restaurants);
     // setAllRestaurant(json?.data?.cards[2]?.data?.data?.cards);
     // setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
-    setAllRestaurant(json?.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
-    setFilteredRestaurant(json?.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+    setAllRestaurant(json?.data?.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+    setFilteredRestaurant(json?.data?.cards[1].card.card.gridElements.infoWithStyle.restaurants);
   
   }
 
-  const searchFunc = (p)=>{
-    setSearchText(p);
-    if(p.length > 0){
-      const showsearchRest = allRestaurant.filter((item) =>  item.info.name.toLowerCase().includes(p.toLocaleLowerCase()))
+  const searchFunc = ()=>{
+
+    if(searchText.length > 0){
+      const showsearchRest = allRestaurant?.filter((item) =>  item.info.name.toLowerCase().includes(searchText.toLocaleLowerCase()))
       console.log("showsearchRest two",showsearchRest)
       setFilteredRestaurant(showsearchRest)
       console.log("showsearchRest", searchText)
@@ -67,16 +65,20 @@ const Body =() =>{
     <div className='search_bar'>
       <input
           type="text"
+          data-testid="searchInput"
           value={searchText}
           placeholder="Type Restuarant Name"
-          onChange={(e) => searchFunc(e.target.value)}
+          onChange={(e) => setSearchText(e.target.value)}
           className='search_bar_input'
           
           />
+          <button onClick={searchFunc}>
+            Search
+          </button>
          
       </div>
       {
-         filteredRestaurant.length === 0?
+         filteredRestaurant?.length === 0?
 
          (<div>
            <Shimmer />
@@ -85,16 +87,17 @@ const Body =() =>{
            <div>
            
            {
-           filteredRestaurant.map((item, index) =>{
+           filteredRestaurant?.map((item, index) =>{
              return (
-               <div className='res_container'
+               <div 
+               className='res_container'
                key={index}>
                  {/* {item.restaurantNew?.info.isOpen ?
                   <RestrauntCard restaurantNew={item} />:
                   <RestaurantCardPromoted restaurantNew={item}/>
 
                  } */}
-                 <RestrauntCard restaurantNew={item} />
+                 <RestrauntCard  restaurantNew={item} />
                </div>
                 
              )
